@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="column">
+    {% for tweet in tweets %}
+        <div class="box">
+            {{tweet.body}} 
+            <span class="is-small has-text-grey-light">
+                ({{ tweet.created_at }} От {{ tweet.user.username }})
+            </span>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="column is-one-third">
+    <div class="block">
+        <a href="{% url 'core:logout' %} ">
+            <button class="button is-danger is-outlined is-fullwidth">
+                Выйти
+            </button>
+        </a>
+    </div>
+     <div class="block">
+        <a href="{% url 'core:profile_list' %} ">
+            <button class="button is-dark is-outlined is-fullwidth">
+                Все профили
+            </button>
+        </a>
+    </div>
+
+    <div class="block">
+        <a href="{% url 'core:profile' request.user.profile.id %} ">
+            <button class="button is-success is-light is-outlined is-fullwidth">
+                Мой профиль
+            </button>
+        </a>
+    </div> 
+
+    <div class="block">
+        <div class="block">
+            <h2 class="title is-2">Отправка сообщения</p>
+        </div>
+        <div class="block">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="button is-success is-fullwidth is-medium mt-5"
+                        type="submit">Отправить
+                </button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

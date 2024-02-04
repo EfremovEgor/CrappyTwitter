@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block content %} {% csrf_token %}
+<div class="container" style="max-width: 450px">
+  <form method="post">
+    {% csrf_token %}
+    <div class="field">
+      <label class="label">Логин:</label>
+      <div class="control has-icons-left has-icons-right">
+        {{form.username}}
+        <span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+        </span>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Пароль:</label>
+      <div class="control has-icons-left has-icons-right">
+        {{ form.password }}
+
+        <span class="icon is-small is-left">
+          <i class="fas fa-lock"></i>
+        </span>
+      </div>
+    </div>
+    <div class="field is-grouped" style="justify-content: space-between">
+      <p class="control">
+        <button type="submit" class="button is-success">Регистрация</button>
+      </p>
+    </div>
+    {{form.errors}}
+  </form>
+</div>
+{%endblock content %}
